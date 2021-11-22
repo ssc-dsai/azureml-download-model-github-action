@@ -23,9 +23,9 @@ jobs:
     - name: Download AzureML Model
       uses: SSC-DSAI/azureml-download-model-github-action@main
       with:
-        model-name: <your-model-name>
+        model-name: '<your-model-name>'
         tenant-id: '<your-tenant-id>'
         spn-id: '<your-spn-id>'
         spn-pwd: '<your-spn-pwd>'
-        workspace-name: <your-workspace-name>
+        workspace-name: '<your-workspace-name>'
 ```
