@@ -1,0 +1,23 @@
+name: Download AzureML Model Test
+
+on:
+  push:
+    branches: 
+      - main
+  workflow_dispatch:
+
+jobs:
+  train-model: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Download AzureML Model
+      uses: SSC-DSAI/azureml-download-model-github-action@main
+      with:
+        model-name: ${{ secrets.MODEL_NAME }}
+        tenant-id: ${{ secrets.TENANT_ID}}
+        spn-id: ${{ secrets.SPN_ID}}
+        spn-pwd: ${{ secrets.SPN_PWD }}
+        workspace-name: ${{ secrets.WORKSPACE_NAME }}
