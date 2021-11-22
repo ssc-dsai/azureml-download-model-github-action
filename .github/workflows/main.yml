@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  train-model: 
+  download-model: 
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
