@@ -20,4 +20,5 @@ jobs:
         tenant-id: ${{ secrets.TENANT_ID}}
         spn-id: ${{ secrets.SPN_ID}}
         spn-pwd: ${{ secrets.SPN_PWD }}
-        workspace-name: ${{ secrets.WORKSPACE_NAME }}
+        workspace-name: "ScScCPS-DSAI-Lab-dev-mlw"
+        resource-group: "ScSc-DSAI-Lab-dev-rg"
