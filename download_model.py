@@ -21,10 +21,8 @@ def main():
 
     ws = Workspace(subscription_id = SUBS_ID, resource_group = RESOURCE_GROUP, workspace_name = WORKSPACE_NAME, auth=auth)
     model = Model(ws, name=MODEL_NAME)
-    model.download(target_dir='.', exist_ok=True)
-
-    # Output the path of the downloaded model
-    model_path = Model.get_model_path(model_name=MODEL_NAME, _workspace=ws)
+    model_path = model.download(target_dir='.', exist_ok=True)
+    
     print(model_path)
 
 if __name__ == "__main__":
