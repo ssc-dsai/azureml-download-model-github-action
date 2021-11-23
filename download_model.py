@@ -17,7 +17,9 @@ def main():
         service_principal_password=SPN_PWD
     )
 
-    ws = Workspace(subscription_id = CONFIG["subscription_id"], resource_group = CONFIG["resource_group"], workspace_name = CONFIG["workspace_name"], auth=auth)
+    print(CONFIG['subscription_id'])
+
+    #ws = Workspace(subscription_id = CONFIG["subscription_id"], resource_group = CONFIG["resource_group"], workspace_name = CONFIG["workspace_name"], auth=auth)
 
     # ws = Workspace.from_config(path='config.json', auth=auth)
 
