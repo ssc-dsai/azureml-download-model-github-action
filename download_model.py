@@ -4,11 +4,13 @@ from azureml.core.model import Model
 import os
 
 # Load .env variables
-CONFIG = os.getenv('CONFIG')
 MODEL_NAME = os.getenv('MODEL_NAME')
+RESOURCE_GROUP = os.getenv('RESOURCE_GROUP')
 SPN_ID = os.getenv('SPN_ID')
 SPN_PWD = os.getenv('SPN_PWD')
+SUBS_ID = os.getenv('SUBS_ID')
 TENANT_ID = os.getenv('TENANT_ID')
+WORKSPACE_NAME = os.getenv('WORKSPACE_NAME')
 
 def main():
     auth = ServicePrincipalAuthentication(
@@ -17,9 +19,7 @@ def main():
         service_principal_password=SPN_PWD
     )
 
-    print(CONFIG)
-
-    #ws = Workspace(subscription_id = CONFIG["subscription_id"], resource_group = CONFIG["resource_group"], workspace_name = CONFIG["workspace_name"], auth=auth)
+    ws = Workspace(subscription_id = SUBS_ID, resource_group = RESOURCE_GROUP, workspace_name = WORKSPACE_NAME, auth=auth)
 
     # ws = Workspace.from_config(path='config.json', auth=auth)
 

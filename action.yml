@@ -2,11 +2,11 @@ name: AzureML Download Model
 description: Downloads an AzureML Model
 
 inputs:
-  config:
-    description: Json Object with the Subscription ID, Resource group name, Workspace name, and Location
-    required: true
   model-name:
     description: Name of the model to be downloaded
+    required: true
+  resource-group:
+    description: The name of the Resource Group
     required: true
   spn-id:
     description: The Service Principal ID
@@ -14,8 +14,14 @@ inputs:
   spn-pwd:
     description: The Service Principal Password
     required: true
+  subs-id:
+    description: The Subscription ID
+    required: true
   tenant-id:
     description: The Tenant ID of your subscription
+    required: true
+  workspace-name:
+    description: The Name of your Workspace
     required: true
 
 runs:
@@ -37,8 +43,10 @@ runs:
       run: python download_model.py
       shell: bash
       env:
-        CONFIG: ${{ inputs.config }}
         MODEL_NAME: ${{ inputs.model-name }}
+        RESOURCE_GROUP: ${{ inputs.resource-group }}
         SPN_ID: ${{ inputs.spn-id }}
         SPN_PWD: ${{ inputs.spn-pwd }}
+        SUBS_ID: ${{ inputs.subs-id }}
         TENANT_ID: ${{ inputs.tenant-id }}
+        WORKSPACE_NAME: ${{ inputs.workspace-name }}
