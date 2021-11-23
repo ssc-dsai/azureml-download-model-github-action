@@ -29,8 +29,6 @@ runs:
       with:
         inlineScript: |
           az login --service-principal -u ${{ inputs.spn-id }} -p ${{ inputs.spn-pwd }} --tenant ${{ inputs.tenant-id }}
-          az extension add -n azure-cli-ml
-          az configure --defaults group=${{ inputs.resource-group }}
 
     - name: Checkout
       uses: actions/checkout@v1
