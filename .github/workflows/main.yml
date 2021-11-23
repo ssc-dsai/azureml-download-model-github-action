@@ -14,6 +14,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Download AzureML Model
+      id: download-model
       uses: SSC-DSAI/azureml-download-model-github-action@main
       with:
         model-name: ${{ secrets.MODEL_NAME }}
@@ -23,3 +24,8 @@ jobs:
         subs-id: ${{ secrets.SUBS_ID }}
         tenant-id: ${{ secrets.TENANT_ID}}
         workspace-name: ${{ secrets.WORKSPACE_NAME }}
+
+    - name: Test file path
+      run: |
+        echo ${{ steps.download-model.outputs.filepath }}
+        ls -a

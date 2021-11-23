@@ -20,21 +20,12 @@ def main():
     )
 
     ws = Workspace(subscription_id = SUBS_ID, resource_group = RESOURCE_GROUP, workspace_name = WORKSPACE_NAME, auth=auth)
-
-    # ws = Workspace.from_config(path='config.json', auth=auth)
-
     model = Model(ws, name=MODEL_NAME)
-
-    print('Model found. Downloading (this may take a while...)')
     model.download(target_dir='.', exist_ok=True)
 
-    # Rename the retrieved file to the path expected by API
+    # Output the path of the downloaded model
     model_path = Model.get_model_path(model_name=MODEL_NAME, _workspace=ws)
-    print('Success. Model downloaded to:')
     print(model_path)
-    os.rename(model_path, 'api/trained_model.bin')
-    print('Model moved to api/trained_model.bin')
-
 
 if __name__ == "__main__":
     main()

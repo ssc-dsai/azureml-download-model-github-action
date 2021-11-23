@@ -23,7 +23,11 @@ inputs:
   workspace-name:
     description: The Name of your Workspace
     required: true
-
+outputs:
+  filepath:
+    description: The Filepath of the downloaded model
+    value: ${{ steps.download-model.outputs.filepath }}
+  
 runs:
   using: "composite"
   steps:
@@ -40,7 +44,10 @@ runs:
       shell: bash
 
     - name: Download Model
-      run: python download_model.py
+      id: download-model
+      run: |
+        filepath=$(python download_model.py)
+        echo "::set-output name=filepath::$(echo $filepath)"
       shell: bash
       env:
         MODEL_NAME: ${{ inputs.model-name }}
