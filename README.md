@@ -23,9 +23,11 @@ jobs:
     - name: Download AzureML Model
       uses: SSC-DSAI/azureml-download-model-github-action@main
       with:
-        model-name: '<your-model-name>'
-        tenant-id: '<your-tenant-id>'
-        spn-id: '<your-spn-id>'
-        spn-pwd: '<your-spn-pwd>'
-        workspace-name: '<your-workspace-name>'
+        model-name: ${{ secrets.MODEL_NAME }}
+        resource-group: ${{ secrets.RESOURCE_GROUP }}
+        spn-id: ${{ secrets.SPN_ID}}
+        spn-pwd: ${{ secrets.SPN_PWD }}
+        subs-id: ${{ secrets.SUBS_ID }}
+        tenant-id: ${{ secrets.TENANT_ID}}
+        workspace-name: ${{ secrets.WORKSPACE_NAME }}
 ```
