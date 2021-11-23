@@ -2,6 +2,9 @@ name: AzureML Download Model
 description: Downloads an AzureML Model
 
 inputs:
+  config:
+    description: Json Object with the Subscription ID, Resource group name, Workspace name, and Location
+    required: true
   model-name:
     description: Name of the model to be downloaded
     required: true
@@ -11,33 +14,31 @@ inputs:
   spn-pwd:
     description: The Service Principal Password
     required: true
-  resource-group:
-    description: The Resource group where the model is located
-    required: true
   tenant-id:
     description: The Tenant ID of your subscription
-    required: true
-  workspace-name:
-    description: The Worspace Name where the model is located
     required: true
 
 runs:
   using: "composite"
   steps:
-    - name: Azure Login
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-          az login --service-principal -u ${{ inputs.spn-id }} -p ${{ inputs.spn-pwd }} --tenant ${{ inputs.tenant-id }}
-
     - name: Checkout
       uses: actions/checkout@v1
-
-    - name: Azure CLI script file
-      uses: azure/CLI@v1
+    
+    - name: Setup Python
+      uses: actions/setup-python@v2
       with:
-        inlineScript: |
-          ${{ github.action_path }}/download_model.sh
+        python-version: 3.6
+
+    - name: Install Dependencies
+      run: pip install azureml-core
+      shell: bash
+
+    - name: Download Model
+      run: python download_model.py
+      shell: bash
       env:
+        CONFIG: ${{ inputs.config }}
         MODEL_NAME: ${{ inputs.model-name }}
-        WORKSPACE_NAME: ${{ inputs.workspace-name }}
+        SPN_ID: ${{ inputs.spn-id }}
+        SPN_PWD: ${{ inputs.spn-pwd }}
+        TENANT_ID: ${{ inputs.tenant-id }}
