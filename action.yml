@@ -2,20 +2,14 @@ name: AzureML Download Model
 description: Downloads an AzureML Model
 
 inputs:
+  azure-credentials:
+    description: Azure credentials
+    required: true
   model-name:
     description: Name of the model to be downloaded
     required: true
-  spn-id:
-    description: The Service Principal ID
-    required: true
-  spn-pwd:
-    description: The Service Principal Password
-    required: true
   resource-group:
     description: The Resource group where the model is located
-    required: true
-  tenant-id:
-    description: The Tenant ID of your subscription
     required: true
   workspace-name:
     description: The Worspace Name where the model is located
@@ -31,7 +25,7 @@ runs:
     - name: Azure Login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ inputs.azure-credentials }}
 
     - name: Checkout
       uses: actions/checkout@v1
@@ -43,10 +37,7 @@ runs:
           ${{ github.action_path }}/download_model.sh
       env:
         MODEL_NAME: ${{ inputs.model-name }}
-        SPN_ID: ${{ inputs.spn-id}}
-        SPN_PWD: ${{ inputs.spn-pwd }}
         RESOURCE_GROUP: ${{ inputs.resource-group }}
-        TENANT_ID: ${{ inputs.tenant-id }}
         WORKSPACE_NAME: ${{ inputs.workspace-name }}
         
 
