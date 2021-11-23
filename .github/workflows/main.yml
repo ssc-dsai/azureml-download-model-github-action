@@ -13,15 +13,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
     - name: Download AzureML Model
       uses: SSC-DSAI/azureml-download-model-github-action@main
       with:
-        azure-credentials: ${{ secrets.AZURE_CREDENTIALS }}
         model-name: ${{ secrets.MODEL_NAME }}
+        tenant-id: ${{ secrets.TENANT_ID}}
+        spn-id: ${{ secrets.SPN_ID}}
+        spn-pwd: ${{ secrets.SPN_PWD }}
         workspace-name: "ScScCPS-DSAI-Lab-dev-mlw"
         resource-group: "ScSc-DSAI-Lab-dev-rg"

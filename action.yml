@@ -2,30 +2,35 @@ name: AzureML Download Model
 description: Downloads an AzureML Model
 
 inputs:
-  azure-credentials:
-    description: Azure credentials
-    required: true
   model-name:
     description: Name of the model to be downloaded
+    required: true
+  spn-id:
+    description: The Service Principal ID
+    required: true
+  spn-pwd:
+    description: The Service Principal Password
     required: true
   resource-group:
     description: The Resource group where the model is located
     required: true
+  tenant-id:
+    description: The Tenant ID of your subscription
+    required: true
   workspace-name:
     description: The Worspace Name where the model is located
     required: true
-outputs:
-  model-file:
-    description: The Model File
-    value: ${{ steps.download-model.outputs.model-file }}
 
 runs:
   using: "composite"
   steps:
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/CLI@v1
       with:
-        creds: ${{ inputs.azure-credentials }}
+        inlineScript: |
+          az login --service-principal -u ${{ inputs.spn-id }} -p ${{ inputs.spn-pwd }} --tenant ${{ inputs.tenant-id }}
+          az extension add -n azure-cli-ml
+          az configure --defaults group=${{ inputs.resource-group }}
 
     - name: Checkout
       uses: actions/checkout@v1
@@ -37,29 +42,4 @@ runs:
           ${{ github.action_path }}/download_model.sh
       env:
         MODEL_NAME: ${{ inputs.model-name }}
-        RESOURCE_GROUP: ${{ inputs.resource-group }}
         WORKSPACE_NAME: ${{ inputs.workspace-name }}
-        
-
-
-  # steps:
-  #   # Install Python
-  #   - uses: actions/setup-python@v2
-  #     with:
-  #       python-version: '3.6'
-
-  #   # Install Azure ML
-  #   - run: python -m pip install azure-cli
-  #     shell: bash
-    
-  #   # Download Azure ML Model
-  #   - id: download-model
-  #     run: ${{ github.action_path }}/download_model.sh
-  #     shell: bash
-  #     env:
-  #       MODEL_NAME: ${{ inputs.model-name }}
-  #       SPN_ID: ${{ inputs.spn-id}}
-  #       SPN_PWD: ${{ inputs.spn-pwd }}
-  #       RESOURCE_GROUP: ${{ inputs.resource-group }}
-  #       TENANT_ID: ${{ inputs.tenant-id }}
-  #       WORKSPACE_NAME: ${{ inputs.workspace-name }}
