@@ -17,7 +17,7 @@ def main():
         service_principal_password=SPN_PWD
     )
 
-    print(CONFIG['subscription_id'])
+    print(CONFIG)
 
     #ws = Workspace(subscription_id = CONFIG["subscription_id"], resource_group = CONFIG["resource_group"], workspace_name = CONFIG["workspace_name"], auth=auth)
 
