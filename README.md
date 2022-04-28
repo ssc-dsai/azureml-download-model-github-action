@@ -21,7 +21,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Download AzureML Model
-      uses: SSC-DSAI/azureml-download-model-github-action@main
+      uses: ssc-dsai/azureml-download-model-github-action@main
       with:
         model-name: ${{ secrets.MODEL_NAME }}
         resource-group: ${{ secrets.RESOURCE_GROUP }}

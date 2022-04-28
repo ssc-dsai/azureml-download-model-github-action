@@ -15,7 +15,7 @@ jobs:
 
     - name: Download AzureML Model
       id: download-model
-      uses: SSC-DSAI/azureml-download-model-github-action@main
+      uses: ssc-dsai/azureml-download-model-github-action@main
       with:
         model-name: ${{ secrets.MODEL_NAME }}
         resource-group: ${{ secrets.RESOURCE_GROUP }}

@@ -32,7 +32,7 @@ runs:
   using: "composite"
   steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     
     - name: Setup Python
       uses: actions/setup-python@v2
@@ -46,7 +46,7 @@ runs:
     - name: Download Model
       id: download-model
       run: |
-        filepath=$(python download_model.py)
+        filepath=$(python ./download_model.py)
         echo "::set-output name=filepath::$(echo $filepath)"
       shell: bash
       env:
