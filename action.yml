@@ -33,6 +33,8 @@ runs:
   steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        repository: ssc-dsai/azureml-download-model-github-action
     
     - name: Setup Python
       uses: actions/setup-python@v2
