@@ -35,6 +35,7 @@ runs:
       uses: actions/checkout@v2
       with:
         repository: ssc-dsai/azureml-download-model-github-action
+        path: model
     
     - name: Setup Python
       uses: actions/setup-python@v2
@@ -48,7 +49,7 @@ runs:
     - name: Download Model
       id: download-model
       run: |
-        filepath=$(python ./download_model.py)
+        filepath=$(python ./model/download_model.py)
         echo "::set-output name=filepath::$(echo $filepath)"
       shell: bash
       env:
