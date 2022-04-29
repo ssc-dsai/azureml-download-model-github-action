@@ -22,7 +22,7 @@ def main():
     ws = Workspace(subscription_id = SUBS_ID, resource_group = RESOURCE_GROUP, workspace_name = WORKSPACE_NAME, auth=auth)
     model = Model(ws, name=MODEL_NAME)  
     model_path = model.download(target_dir='.', exist_ok=True)
-    print(os.rename(model_path, 'trained_model.bin.gz'))
+    print(os.rename(model_path, 'trained_model.bin'))
 
 if __name__ == "__main__":
     main()
