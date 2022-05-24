@@ -23,6 +23,9 @@ inputs:
   workspace-name:
     description: The Name of your Workspace
     required: true
+  file-name:
+    description: The Name to give to the model file
+    required: true
 outputs:
   filepath:
     description: The Filepath of the downloaded model
@@ -60,3 +63,4 @@ runs:
         SUBS_ID: ${{ inputs.subs-id }}
         TENANT_ID: ${{ inputs.tenant-id }}
         WORKSPACE_NAME: ${{ inputs.workspace-name }}
+        FILE_NAME: ${{ inputs.file-name }}

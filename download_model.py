@@ -11,6 +11,7 @@ SPN_PWD = os.getenv('SPN_PWD')
 SUBS_ID = os.getenv('SUBS_ID')
 TENANT_ID = os.getenv('TENANT_ID')
 WORKSPACE_NAME = os.getenv('WORKSPACE_NAME')
+FILE_NAME = os.getenv('FILE_NAME')
 
 def main():
     auth = ServicePrincipalAuthentication(
@@ -22,7 +23,7 @@ def main():
     ws = Workspace(subscription_id = SUBS_ID, resource_group = RESOURCE_GROUP, workspace_name = WORKSPACE_NAME, auth=auth)
     model = Model(ws, name=MODEL_NAME)  
     model_path = model.download(target_dir='.', exist_ok=True)
-    print(os.rename(model_path, 'trained_model.bin'))
+    print(os.rename(model_path, FILE_NAME + '.bin'))
 
 if __name__ == "__main__":
     main()
